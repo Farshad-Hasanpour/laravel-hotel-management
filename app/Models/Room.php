@@ -9,6 +9,6 @@ class Room extends Model
     protected $fillable = ['room_number', 'status'];
     public function guests()
     {
-        return $this->belongsToMany(Guest::class, 'guest_room');
+        return $this->belongsToMany(Guest::class, 'guest_room', 'room_id', 'guest_id');
     }
 }

@@ -10,6 +10,6 @@ class Guest extends Model
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class, 'guest_room');
+        return $this->belongsToMany(Room::class, 'guest_room', 'guest_id', 'room_id');
     }
 }

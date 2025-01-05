@@ -22,7 +22,9 @@ class ReservationController extends Controller
         ]);
 
         $room = Room::findOrFail($request->room_id);
-        $room->guests()->attach($request->guest_id);
+        $guest = Guest::findOrFail($request->guest_id);
+
+        $room->guests()->attach($guest);
 
         return response()->json('Reservation created', 201);
     }

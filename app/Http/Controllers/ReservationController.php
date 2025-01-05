@@ -10,7 +10,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Room::with('guests')->get();
+        $reservations = Room::with('guests')->has('guests')->get();
         return response()->json($reservations);
     }
 

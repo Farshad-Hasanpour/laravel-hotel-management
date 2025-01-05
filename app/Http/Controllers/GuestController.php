@@ -9,7 +9,7 @@ class GuestController extends Controller
 {
     public function index()
     {
-        return Guest::all();  // Get all guests
+        return response()->json(Guest::all(), 201);
     }
 
     public function store(Request $request)
@@ -20,12 +20,12 @@ class GuestController extends Controller
         ]);
 
         $guest = Guest::create($request->all());
-        return response()->json($guest, 201);  // Created status
+        return response()->json($guest, 201);
     }
 
     public function show(Guest $guest)
     {
-        return $guest;  // Show a specific guest
+        return response()->json($guest);
     }
 
     public function update(Request $request, Guest $guest)
@@ -37,6 +37,6 @@ class GuestController extends Controller
     public function destroy(Guest $guest)
     {
         $guest->delete();
-        return response()->json(null, 204);  // No content status
+        return response()->json(null, 204);
     }
 }

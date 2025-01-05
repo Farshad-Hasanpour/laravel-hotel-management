@@ -10,8 +10,8 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Room::with('guests')->get();  // Get all rooms with their guests
-        return $reservations;
+        $reservations = Room::with('guests')->get();
+        return response()->json($reservations);
     }
 
     public function store(Request $request)
@@ -22,7 +22,7 @@ class ReservationController extends Controller
         ]);
 
         $room = Room::findOrFail($request->room_id);
-        $room->guests()->attach($request->guest_id);  // Create the reservation (pivot relation)
+        $room->guests()->attach($request->guest_id);
 
         return response()->json('Reservation created', 201);
     }
@@ -30,13 +30,13 @@ class ReservationController extends Controller
     public function show($id)
     {
         $room = Room::with('guests')->findOrFail($id);
-        return $room;  // Show room with associated guests
+        return response()->json($room);
     }
 
     public function destroy($id)
     {
         $room = Room::findOrFail($id);
-        $room->guests()->detach();  // Remove all guests (reservations)
+        $room->guests()->detach();
         return response()->json('Reservations removed', 204);
     }
 }

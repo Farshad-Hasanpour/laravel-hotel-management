@@ -9,7 +9,7 @@ class RoomController extends Controller
 {
     public function index()
     {
-        return Room::all();  // Get all rooms
+        return response()->json(Room::all());
     }
 
     public function store(Request $request)
@@ -20,12 +20,12 @@ class RoomController extends Controller
         ]);
 
         $room = Room::create($request->all());
-        return response()->json($room, 201);  // Created status
+        return response()->json($room, 201);
     }
 
     public function show(Room $room)
     {
-        return $room;  // Show a specific room
+        return response()->json($room);
     }
 
     public function update(Request $request, Room $room)
@@ -37,6 +37,6 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room->delete();
-        return response()->json(null, 204);  // No content status
+        return response()->json(null, 204);
     }
 }
